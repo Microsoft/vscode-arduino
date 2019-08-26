@@ -95,3 +95,9 @@ export function openExample(examplePath) {
         examplePath,
     }).then((response) => response.json());
 }
+
+export function updatePlotRefreshRate(rate) {
+    return postHTTP("/api/updateplotrate", {
+        rate,
+    }).then((response) => response.json());
+}

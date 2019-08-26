@@ -45,6 +45,7 @@ This extension provides several commands in the Command Palette (<kbd>F1</kbd> o
 - **Arduino: Initialize**: Scaffold a VS Code project with an Arduino sketch.
 - **Arduino: Library Manager**: Explore and manage libraries.
 - **Arduino: Open Serial Monitor**: Open the serial monitor in the integrated output window.
+- **Arduino: Open Serial Plotter**: Open the serial plotter.
 - **Arduino: Select Serial Port**: Change the current serial port.
 - **Arduino: Send Text to Serial Port**: Send a line of text via the current serial port.
 - **Arduino: Upload**: Build sketch and upload to Arduino board.
@@ -83,7 +84,8 @@ The following Visual Studio Code settings are available for the Arduino extensio
         "https://raw.githubusercontent.com/VSChina/azureiotdevkit_tools/master/package_azureboard_index.json",
         "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
     ],
-    "arduino.defaultBaudRate": 115200
+    "arduino.defaultBaudRate": 115200,
+    "arduino.plotterRegex": "^PLOT\\[(\\d+)\\]\\[(.+?)=(.+?)\\]$",
 }
 ```
 *Note:* You only need to set `arduino.path` in Visual Studio Code settings, other options are not required.
@@ -125,6 +127,45 @@ Steps to start debugging:
 4. When your breakpoint is hit, you can see variables and add expression(s) to watch on the Debug Side Bar.
 
 > To learn more about how to debug Arduino code, visit our [team blog](https://blogs.msdn.microsoft.com/iotdev/2017/05/27/debug-your-arduino-code-with-visual-studio-code/).
+
+## Using Serial Plotter
+
+You can start Serial Plotter by calling `Arduino: Open Serial Plotter` from Command Pallete. 
+
+By default, it looks for lines of the following format in the serial input: `PLOT[time][variable=value]`
+
+For example, `PLOT[1234][cos=0.5]` means that we have variable named `cos` with it's value `0.5` at the time `1234`.
+
+You can use snippet below to print variables in such format.
+
+```c
+void plot(String name, float value)
+{
+  String time = String(millis());
+  Serial.println("PLOT[" + time + "][" + name + "=" + value + "]");
+}
+```
+
+### Throttling (refresh rate)
+
+This Plotter is not working in real time. It's built on top of web technologies
+with [dygraphs](http://dygraphs.com/) library to create interactive chart, so it's pretty fast but not instant.
+
+Plotter accumulates data and flushes it to the chart with some periodicity that we will call `throttling` or `refresh rate`. By default it's 100ms, but you can change it as you want. This value was chosen empirically, lower values ​​can lead to noticable lags.
+
+### Time window
+
+Data is recorded for a specified period of time called `Time window`. By default it's 20 seconds and you can also change it in the way you need. The greater the value, the more resources are required to render chart, and the more lags we have.
+
+### Override log format
+
+You can override default regex to specify your own format, but the order will be remain the same: time, variable name, variable value.
+
+```json
+{
+    "arduino.plotterRegex": "^(\\d+):(.+?)=(.+?)$"
+}
+```
 
 ## Change Log
 See the [Change log](https://github.com/Microsoft/vscode-arduino/blob/master/CHANGELOG.md) for details about the changes in each version.

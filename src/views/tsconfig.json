@@ -7,7 +7,11 @@
         "outDir": "out",
         "alwaysStrict": true,
         "sourceMap": true,
-        "rootDir": "."
+        "rootDir": ".",
+        "lib": [
+            "dom",
+            "es2017"
+        ]
     },
     "exclude": [
         "node_modules"

@@ -216,3 +216,41 @@ a {
         width: 70%;
     }
 }
+
+.serialplotter {
+    padding: 12px;
+    
+    .graph {
+        width: 100% !important;
+    }
+
+    .settings {
+        padding: 12px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .section {
+        display: grid;
+        grid-auto-columns: auto;
+        grid-auto-flow: column;
+        grid-gap: 6px;
+        align-items: baseline;
+        border: 1px solid white;
+        padding: 6px;
+    }
+    
+    .parameters {
+        display: grid;
+        grid-auto-columns: auto;
+        grid-auto-flow: row;
+        grid-gap: 6px;
+
+        input {
+            width: 80px;
+        }
+    }
+    
+    .actions {
+    }
+}

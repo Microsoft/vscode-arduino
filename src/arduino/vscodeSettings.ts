@@ -15,6 +15,7 @@ const configKeys = {
     IGNORE_BOARDS: "arduino.ignoreBoards",
     SKIP_HEADER_PROVIDER: "arduino.skipHeaderProvider",
     DEFAULT_BAUD_RATE: "arduino.defaultBaudRate",
+    PLOTTER_REGEX: "arduino.plotterRegex",
 };
 
 export interface IVscodeSettings {
@@ -28,6 +29,7 @@ export interface IVscodeSettings {
     ignoreBoards: string[];
     skipHeaderProvider: boolean;
     defaultBaudRate: number;
+    plotterRegex: string;
     updateAdditionalUrls(urls: string | string[]): void;
 }
 
@@ -85,6 +87,10 @@ export class VscodeSettings implements IVscodeSettings {
 
     public get skipHeaderProvider(): boolean {
         return this.getConfigValue<boolean>(configKeys.SKIP_HEADER_PROVIDER);
+    }
+
+    public get plotterRegex(): string {
+        return this.getConfigValue<string>(configKeys.PLOTTER_REGEX);
     }
 
     public async updateAdditionalUrls(value) {

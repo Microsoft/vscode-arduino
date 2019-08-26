@@ -50,6 +50,7 @@
     "onCommand:arduino.showLibraryManager",
     "onCommand:arduino.showExamples",
     "onCommand:arduino.initialize",
+    "onCommand:arduino.openSerialPlotter",
     "onDebug"
   ],
   "main": "./out/src/extension",
@@ -132,6 +133,10 @@
       {
         "command": "arduino.showExamples",
         "title": "Arduino: Examples"
+      },
+      {
+        "command": "arduino.openSerialPlotter",
+        "title": "Arduino: Open Serial Plotter"
       }
     ],
     "menus": {
@@ -489,6 +494,10 @@
         "arduino.defaultBaudRate": {
           "type": "number",
           "default": 115200
+        },
+        "arduino.plotterRegex": {
+          "type": "string",
+          "default": "^PLOT\\[(\\d+)\\]\\[(.+?)=(.+?)\\]$"
         }
       }
     },
@@ -569,12 +578,14 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "@types/dygraphs": "^1.1.8",
     "body-parser": "^1.16.1",
     "compare-versions": "^3.4.0",
     "eventemitter2": "^4.1.0",
     "express": "^4.14.1",
     "glob": "^7.1.1",
     "iconv-lite": "^0.4.18",
+    "lodash.throttle": "^4.1.1",
     "properties": "^1.2.1",
     "uuid": "^3.0.1",
     "vscode-extension-telemetry": "0.0.18",

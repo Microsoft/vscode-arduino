@@ -10,8 +10,8 @@ import BoardConfig from "./components/BoardConfig";
 import BoardManager from "./components/BoardManager";
 import ExampleTreeView from "./components/ExampleTreeView";
 import LibraryManager from "./components/LibraryManager";
+import SerialPlotter from "./components/SerialPlotter";
 import reducer from "./reducers";
-
 import "./styles";
 
 class App extends React.Component<{}, {}> {
@@ -35,6 +35,7 @@ ReactDOM.render(
         <Route path="librarymanager" component={LibraryManager} />
         <Route path="boardconfig" component={BoardConfig} />
         <Route path="examples" component={ExampleTreeView} />
+        <Route path="serialplotter" component={SerialPlotter} />
       </Route>
     </Router>
   </Provider>,
