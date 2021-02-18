@@ -8,7 +8,7 @@ export function parseBoardDescriptor(boardDescriptor: string, plat: IPlatform): 
     const boardLineRegex = /([^\.]+)\.(\S+)=(.+)/;
 
     const result = new Map<string, IBoard>();
-    const lines = boardDescriptor.split(/[\r|\r\n|\n]/);
+    const lines = boardDescriptor.split(/\r?\n/);
     const menuMap = new Map<string, string>();
 
     lines.forEach((line) => {
