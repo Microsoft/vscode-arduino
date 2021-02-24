@@ -120,6 +120,9 @@ export class ArduinoApp {
         }
 
         arduinoChannel.show();
+        if (VscodeSettings.getInstance().clearOutputOnBuild) {
+            arduinoChannel.clear();
+        }
         arduinoChannel.start(`Upload sketch - ${dc.sketch}`);
 
         const serialMonitor = SerialMonitor.getInstance();
@@ -205,6 +208,9 @@ export class ArduinoApp {
         }
 
         arduinoChannel.show();
+        if (VscodeSettings.getInstance().clearOutputOnBuild) {
+            arduinoChannel.clear();
+        }
         arduinoChannel.start(`Upload sketch - ${dc.sketch}`);
 
         const serialMonitor = SerialMonitor.getInstance();
@@ -262,6 +268,9 @@ export class ArduinoApp {
 
         await vscode.workspace.saveAll(false);
 
+        if (VscodeSettings.getInstance().clearOutputOnBuild) {
+            arduinoChannel.clear();
+        }
         arduinoChannel.start(`Verify sketch - ${dc.sketch}`);
 
         if (dc.prebuild) {

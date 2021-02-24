@@ -33,4 +33,8 @@ export const arduinoChannel = {
     hide() {
         this.channel.hide();
     },
+
+    clear() {
+        this.channel.clear();
+    },
 };

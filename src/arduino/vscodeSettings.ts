@@ -8,6 +8,7 @@ const configKeys = {
     ARDUINO_COMMAND_PATH: "arduino.commandPath",
     ADDITIONAL_URLS: "arduino.additionalUrls",
     LOG_LEVEL: "arduino.logLevel",
+    CLEAR_OUTPUT_ON_START: "arduino.clearOutputOnBuild",
     AUTO_UPDATE_INDEX_FILES: "arduino.autoUpdateIndexFiles",
     ALLOW_PDE_FILETYPE: "arduino.allowPDEFiletype",
     ENABLE_USB_DETECTION: "arduino.enableUSBDetection",
@@ -22,6 +23,7 @@ export interface IVscodeSettings {
     commandPath: string;
     additionalUrls: string | string[];
     logLevel: string;
+    clearOutputOnBuild: boolean;
     allowPDEFiletype: boolean;
     enableUSBDetection: boolean;
     disableTestingOpen: boolean;
@@ -57,6 +59,10 @@ export class VscodeSettings implements IVscodeSettings {
 
     public get logLevel(): string {
         return this.getConfigValue<string>(configKeys.LOG_LEVEL) || "info";
+    }
+
+    public get clearOutputOnBuild(): boolean {
+        return this.getConfigValue<boolean>(configKeys.CLEAR_OUTPUT_ON_START);
     }
 
     public get allowPDEFiletype(): boolean {
