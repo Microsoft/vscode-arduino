@@ -141,6 +141,15 @@
         "architecture": "samd",
         "id": "adafruit_feather_m0",
         "target": "at91samdXX.cfg"
+      },
+      {
+        "vid": "239a",
+        "pid": "8031",
+        "name": "Adafruit Grand Central M4 (SAMD51)",
+        "package": "adafruit",
+        "architecture": "samd",
+        "id": "adafruit_grandcentral_m4",
+        "target": "atsame5x.cfg"  
       }
     ]
   },
