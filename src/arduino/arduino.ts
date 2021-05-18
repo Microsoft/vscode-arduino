@@ -443,10 +443,29 @@ export class ArduinoApp {
      */
     protected async runPrePostBuildCommand(dc: DeviceContext,
                                            environment: any,
-                                           what: "pre" | "post"): Promise<boolean> {
-        const cmdline = what === "pre"
-            ? dc.prebuild
-            : dc.postbuild;
+                                           what: "pre" | "success" | "failed" | "post"): Promise<boolean> {
+        let cmdline;
+        switch(what) {
+            case "pre": {
+                cmdline = dc.prebuild;
+                break;
+            } 
+            case "success": {
+                cmdline = dc.successfulbuild;
+                break;
+            }
+            case "failed": {
+                cmdline = dc.failedbuild;
+                break;
+            }
+            case "post": {
+                cmdline = dc.postbuild;
+                break;
+            }
+            default: {
+                break;
+            }
+        } 
 
         if (!cmdline) {
             return true; // Successfully done nothing.
@@ -714,8 +733,11 @@ export class ArduinoApp {
         const cleanup = async (result: "ok" | "error") => {
             let ret = true;
             if (result === "ok") {
-                ret = await this.runPrePostBuildCommand(dc, env, "post");
+                ret = await this.runPrePostBuildCommand(dc, env, "success");
+            } else {
+                ret = await this.runPrePostBuildCommand(dc, env, "failed");
             }
+            ret = await this.runPrePostBuildCommand(dc, env, "post");
             await cocopa.conclude();
             if (buildMode === BuildMode.Upload || buildMode === BuildMode.UploadProgrammer) {
                 UsbDetector.getInstance().resumeListening();

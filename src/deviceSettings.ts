@@ -141,6 +141,8 @@ export class DeviceSettings {
     public intelliSenseGen = new StrSetting();
     public configuration = new StrSetting();
     public prebuild = new StrSetting();
+    public successfulbuild = new StrSetting();
+    public failedbuild = new StrSetting();
     public postbuild = new StrSetting();
     public programmer = new StrSetting();
     public buildPreferences = new  BuildPrefSetting();
@@ -158,6 +160,8 @@ export class DeviceSettings {
                this.intelliSenseGen.modified ||
                this.configuration.modified ||
                this.prebuild.modified ||
+               this.successfulbuild.modified ||
+               this.failedbuild.modified ||
                this.postbuild.modified ||
                this.programmer.modified ||
                this.buildPreferences.modified;
@@ -174,6 +178,8 @@ export class DeviceSettings {
         this.intelliSenseGen.commit();
         this.configuration.commit();
         this.prebuild.commit();
+        this.successfulbuild.commit();
+        this.failedbuild.commit();
         this.postbuild.commit();
         this.programmer.commit();
         this.buildPreferences.commit();
@@ -192,6 +198,8 @@ export class DeviceSettings {
         this.intelliSenseGen.reset();
         this.configuration.reset();
         this.prebuild.reset();
+        this.successfulbuild.reset();
+        this.failedbuild.reset();
         this.postbuild.reset();
         this.programmer.reset();
         this.buildPreferences.reset();
@@ -218,6 +226,8 @@ export class DeviceSettings {
             this.debugger.value = settings.debugger;
             this.intelliSenseGen.value = settings.intelliSenseGen;
             this.prebuild.value = settings.prebuild;
+            this.successfulbuild.value = settings.successfulbuild;
+            this.failedbuild.value = settings.failedbuild;
             this.postbuild.value = settings.postbuild;
             this.programmer.value = settings.programmer;
             this.buildPreferences.value = settings.buildPreferences;

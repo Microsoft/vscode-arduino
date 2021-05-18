@@ -187,6 +187,8 @@ export class DeviceContext implements IDeviceContext, vscode.Disposable {
     public get onChangeISAutoGen() { return this._settings.intelliSenseGen.emitter.event }
     public get onChangeConfiguration() { return this._settings.configuration.emitter.event }
     public get onChangePrebuild() { return this._settings.prebuild.emitter.event }
+    public get onChangeSuccessfulbuild() { return this._settings.successfulbuild.emitter.event }
+    public get onChangeFailedbuild() { return this._settings.failedbuild.emitter.event }
     public get onChangePostbuild() { return this._settings.postbuild.emitter.event }
     public get onChangeProgrammer() { return this._settings.programmer.emitter.event }
 
@@ -219,6 +221,14 @@ export class DeviceContext implements IDeviceContext, vscode.Disposable {
 
     public get prebuild() {
         return this._settings.prebuild.value;
+    }
+
+    public get successfulbuild() {
+        return this._settings.successfulbuild.value;
+    }
+
+    public get failedbuild() {
+        return this._settings.failedbuild.value;
     }
 
     public get postbuild() {

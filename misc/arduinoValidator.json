@@ -48,6 +48,16 @@
             "type": "string",
             "minLength": 1
         },
+        "successfulbuild": {
+            "description": "Command to be run after every successful build",
+            "type": "string",
+            "minLength": 1
+        },
+        "failedbuild": {
+            "description": "Command to be run after every failed build",
+            "type": "string",
+            "minLength": 1
+        },
         "postbuild": {
             "description": "Command to be run after every build",
             "type": "string",
