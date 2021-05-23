@@ -207,13 +207,16 @@ export function spawn(
 
         let codepage = "65001";
         if (os.platform() === "win32") {
-            try {
-                const chcp = child_process.execSync("chcp.com");
-                codepage = chcp.toString().split(":").pop().trim();
-            } catch (error) {
-                arduinoChannel.warning(`Defaulting to code page 850 because chcp.com failed.\
-                \rEnsure your path includes %SystemRoot%\\system32\r${error.message}`);
-                codepage = "850";
+            codepage = getArduinoL4jCodepage(command.replace(/.exe$/i, ".l4j.ini"));
+            if (!codepage) {
+                try {
+                    const chcp = child_process.execSync("chcp.com");
+                    codepage = chcp.toString().split(":").pop().trim();
+                } catch (error) {
+                    arduinoChannel.warning(`Defaulting to code page 850 because chcp.com failed.\
+                    \rEnsure your path includes %SystemRoot%\\system32\r${error.message}`);
+                    codepage = "850";
+                }
             }
         }
 
@@ -251,6 +254,16 @@ export function spawn(
             }
         });
     });
+}
+
+export function getArduinoL4jCodepage(filePath: string): string | undefined {
+    const encoding = parseConfigFile(filePath).get("-Dfile.encoding");
+    if(encoding === "UTF8") {
+        return "65001";
+    }
+    return Object.keys(encodingMapping).reduce((r, key) => {
+        return encodingMapping[key] === encoding ? key : r;
+    }, undefined);
 }
 
 export function decodeData(data: Buffer, codepage: string): string {
