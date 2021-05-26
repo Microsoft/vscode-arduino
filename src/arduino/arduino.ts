@@ -134,8 +134,13 @@ export class ArduinoApp {
      */
     public async setPref(key, value) {
         try {
-            await util.spawn(this._settings.commandPath,
-                             ["--pref", `${key}=${value}`, "--save-prefs"]);
+            if (this.useArduinoCli()) {
+                await util.spawn(this._settings.commandPath,
+                    ["--build-property", `${key}=${value}`]);
+            } else {
+                await util.spawn(this._settings.commandPath,
+                                 ["--pref", `${key}=${value}`, "--save-prefs"]);
+            }
         } catch (ex) {
         }
     }
@@ -632,7 +637,11 @@ export class ArduinoApp {
             for (const pref of dc.buildPreferences) {
                 // Note: BuildPrefSetting makes sure that each preference
                 // value consists of exactly two items (key and value).
-                args.push("--pref", `${pref[0]}=${pref[1]}`);
+                if (this.useArduinoCli()) {
+                    args.push("--build-property", `${pref[0]}=${pref[1]}`);
+                } else {
+                    args.push("--pref", `${pref[0]}=${pref[1]}`);
+                }
             }
         }
 
