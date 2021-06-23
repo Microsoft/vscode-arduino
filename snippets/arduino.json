@@ -34,6 +34,13 @@
         ],
         "description": "Function setup"
     },
+    "sb": {
+        "prefix": "asb",
+        "body": [
+            "Serial.begin($0)"
+        ],
+        "description": "Insert Serial.begin"
+    },
     "spr": {
         "prefix": "aspr",
         "body": [
@@ -48,6 +55,13 @@
         ],
         "description": "Insert Serial.println"
     },
+    "pm": {
+        "prefix": "apm",
+        "body": [
+            "pinMode($0)"
+        ],
+        "description": "Insert pinMode"
+    },
     "dw": {
         "prefix": "adw",
         "body": [
@@ -61,5 +75,19 @@
             "digitalRead($0)"
         ],
         "description": "Insert digitalRead"
+    },
+    "aw": {
+        "prefix": "aaw",
+        "body": [
+            "analogWrite($0)"
+        ],
+        "description": "Insert analogWrite"
+    },
+    "ar": {
+        "prefix": "aar",
+        "body": [
+            "analogRead($0)"
+        ],
+        "description": "Insert analogRead"
     }
 }
