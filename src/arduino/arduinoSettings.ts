@@ -72,7 +72,7 @@ export class ArduinoSettings implements IArduinoSettings {
                 this._sketchbookPath = path.join(process.env.HOME, "Arduino");
             }
 
-            if (this._commandPath === "") {
+            if (this._commandPath === "" && !this._useArduinoCli) {
                 this._commandPath = "arduino";
             }
         } else if (platform === "darwin") {
@@ -92,7 +92,7 @@ export class ArduinoSettings implements IArduinoSettings {
                 this._sketchbookPath = path.join(process.env.HOME, "Documents/Arduino");
             }
 
-            if (this._commandPath === "") {
+            if (this._commandPath === "" && !this._useArduinoCli) {
                 this._commandPath = "/Contents/MacOS/Arduino";
             }
         }
